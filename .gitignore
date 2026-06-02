@@ -1,0 +1,63 @@
+# =========================
+# Build output
+# =========================
+bin/
+obj/
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+publish/
+
+# =========================
+# Visual Studio / VS Code
+# =========================
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# =========================
+# Rider / JetBrains
+# =========================
+.idea/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+
+# =========================
+# Environment / secrets
+# =========================
+.env
+.env.*
+secrets.json
+
+# =========================
+# SQLite temporary files
+# =========================
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# =========================
+# NuGet
+# =========================
+*.nupkg
+packages/
+
+# =========================
+# Docker temporary files
+# =========================
+.docker/
