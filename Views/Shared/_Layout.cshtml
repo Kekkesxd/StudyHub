@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+@{
+    string currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    string currentAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+
+    bool isAuthPage = currentController == "Auth";
+
+    string Active(string controllerName, string? actionName = null)
+    {
+        if (currentController != controllerName)
+        {
+            return "";
+        }
+
+        if (actionName != null && currentAction != actionName)
+        {
+            return "";
+        }
+
+        return "active";
+    }
+}
+
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - StudyHub</title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+</head>
+
+<body>
+
+    <header class="top-shell">
+
+        <nav class="study-navbar @(isAuthPage ? "auth-only-navbar" : "")">
+
+            <a class="study-brand"
+               asp-controller="Home"
+               asp-action="Dashboard">
+
+                <span class="brand-icon">📚</span>
+                <span>StudyHub</span>
+
+            </a>
+
+            @if (!isAuthPage)
+            {
+                <div class="study-menu">
+
+                    @if (Context.Session.GetInt32("UserId") != null)
+                    {
+                        <div class="study-links">
+
+                            <a class='study-nav-link @Active("Home", "Dashboard")'
+                               asp-controller="Home"
+                               asp-action="Dashboard">
+                                <span>🏠</span>
+                                <small>Dashboard</small>
+                            </a>
+
+                            <a class='study-nav-link @Active("Courses", "Index")'
+                               asp-controller="Courses"
+                               asp-action="Index">
+                                <span>📘</span>
+                                <small>Courses</small>
+                            </a>
+
+                            <a class='study-nav-link @Active("Courses", "MyCourses")'
+                               asp-controller="Courses"
+                               asp-action="MyCourses">
+                                <span>🎓</span>
+                                <small>Active Courses</small>
+                            </a>
+
+                            <a class='study-nav-link @Active("Assignments")'
+                               asp-controller="Assignments"
+                               asp-action="Index">
+                                <span>📝</span>
+                                <small>Assignments</small>
+                            </a>
+
+                            <a class='study-nav-link @Active("Profile")'
+                               asp-controller="Profile"
+                               asp-action="Index">
+                                <span>👤</span>
+                                <small>Profile</small>
+                            </a>
+
+                        </div>
+
+                        <div class="user-area">
+
+                            <div class="user-pill">
+                                <span class="user-dot"></span>
+                                <span>Hello, @Context.Session.GetString("Username")</span>
+                            </div>
+
+                            <a class="logout-btn"
+                               asp-controller="Auth"
+                               asp-action="Logout">
+                                Logout
+                            </a>
+
+                        </div>
+                    }
+
+                </div>
+            }
+
+        </nav>
+
+    </header>
+
+    <main role="main" class="main-content">
+
+        @RenderBody()
+
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+
+</html>

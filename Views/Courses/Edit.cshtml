@@ -1,0 +1,119 @@
+@model StudyHub.Models.Course
+
+@{
+    ViewData["Title"] = "Create Course";
+}
+
+<div class="container mt-4">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-7">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body p-4">
+
+                    <h2 class="mb-4">
+                        Edit Course
+                    </h2>
+
+                    <form asp-action="Edit" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="Id" />
+                        
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger mb-3">
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Title
+                            </label>
+
+                            <input asp-for="Title"
+                                   class="form-control" />
+
+                            <span asp-validation-for="Title"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Course Code
+                            </label>
+
+                            <input asp-for="Code"
+                                   class="form-control" />
+
+                            <span asp-validation-for="Code"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Instructor
+                            </label>
+
+                            <input asp-for="Instructor"
+                                   class="form-control" />
+
+                            <span asp-validation-for="Instructor"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Description
+                            </label>
+
+                            <textarea asp-for="Description"
+                                      class="form-control"
+                                      rows="5">
+                            </textarea>
+
+                            <span asp-validation-for="Description"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <button class="btn btn-primary">
+                            Save Changes
+                        </button>
+
+                        <a class="btn btn-secondary"
+                           asp-action="Index">
+
+                            Back
+
+                        </a>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

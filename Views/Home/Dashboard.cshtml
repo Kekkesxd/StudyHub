@@ -1,0 +1,83 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="dashboard-page">
+
+    <div class="mb-5">
+        <h1 class="page-title">
+            Welcome, @Context.Session.GetString("FullName")
+        </h1>
+
+        <p class="page-subtitle">
+            Here's an overview of your StudyHub account.
+        </p>
+    </div>
+
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-4">
+            <div class="stat-card">
+                <p class="stat-label">Total Courses</p>
+                <h2 class="stat-value">@ViewBag.TotalCourses</h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="stat-card">
+                <p class="stat-label">Current Courses</p>
+                <h2 class="stat-value">@ViewBag.CurrentCourses</h2>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="stat-card">
+                <p class="stat-label">Assignments</p>
+                <h2 class="stat-value">@ViewBag.TotalAssignments</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="study-card p-4">
+
+        <h2 class="mb-4">Upcoming Assignments</h2>
+
+        @if (ViewBag.UpcomingAssignments != null && ViewBag.UpcomingAssignments.Count > 0)
+        {
+            <div class="assignment-list">
+
+                @foreach (var assignment in ViewBag.UpcomingAssignments)
+                {
+                    <div class="assignment-item">
+
+                        <div>
+                            <strong>@assignment.Title</strong>
+
+                            @if (assignment.Course != null)
+                            {
+                                <span class="assignment-course">
+                                    @assignment.Course.Title
+                                </span>
+                            }
+                        </div>
+
+                        <span class="assignment-date">
+                            @assignment.DueDate.ToShortDateString()
+                        </span>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <p class="text-muted mb-0">
+                No upcoming assignments yet.
+            </p>
+        }
+
+    </div>
+
+</div>

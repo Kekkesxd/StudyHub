@@ -1,0 +1,141 @@
+@model List<StudyHub.Models.Assignment>
+
+@{
+    ViewData["Title"] = "Assignments";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2>Assignments</h2>
+
+            <p class="text-muted">
+                Manage assignments and deadlines.
+            </p>
+
+        </div>
+
+        <a class="btn btn-primary"
+           asp-action="Create">
+
+            Create Assignment
+
+        </a>
+
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    <form method="get" class="row mb-4">
+
+        <div class="col-md-4">
+
+            <select name="courseId"
+                    class="form-select"
+                    asp-items="ViewBag.Courses">
+
+                <option value="">
+                    All Courses
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button class="btn btn-dark w-100">
+                Filter
+            </button>
+
+        </div>
+
+    </form>
+
+    <div class="card shadow border-0">
+
+        <div class="card-body">
+
+            <table class="table table-hover align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Title</th>
+
+                        <th>Course</th>
+
+                        <th>Due Date</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var assignment in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                @assignment.Title
+                            </td>
+
+                            <td>
+                                @assignment.Course?.Title
+                            </td>
+
+                            <td>
+                                @assignment.DueDate.ToShortDateString()
+                            </td>
+
+                            <td>
+                                <a class="btn btn-primary btn-sm"
+                                asp-action="Details"
+                                asp-route-id="@assignment.Id">
+
+                                    Details
+
+                                </a>
+
+                                <a class="btn btn-warning btn-sm"
+                                   asp-action="Edit"
+                                   asp-route-id="@assignment.Id">
+
+                                    Edit
+
+                                </a>
+
+                                <a class="btn btn-danger btn-sm"
+                                   asp-action="Delete"
+                                   asp-route-id="@assignment.Id">
+
+                                    Delete
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

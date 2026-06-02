@@ -1,0 +1,57 @@
+@model StudyHub.Models.User
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="profile-page">
+
+    <div class="profile-card">
+
+        <div class="profile-header">
+
+            <div class="profile-avatar">
+                @Model.FullName.Substring(0, 1).ToUpper()
+            </div>
+
+            <h1>@Model.FullName</h1>
+
+            <p class="profile-username">
+                @Model.Username
+            </p>
+
+        </div>
+
+        <hr />
+
+        <div class="profile-info">
+
+            <div>
+                <span>Email</span>
+                <strong>@Model.Email</strong>
+            </div>
+
+            <div>
+                <span>Member Since</span>
+                <strong>@Model.CreatedAt.ToShortDateString()</strong>
+            </div>
+
+        </div>
+
+        <div class="profile-stats">
+
+            <div class="profile-stat-box">
+                <h2>@ViewBag.EnrollmentCount</h2>
+                <p>Current Courses</p>
+            </div>
+
+            <div class="profile-stat-box">
+                <h2>@ViewBag.AssignmentCount</h2>
+                <p>Assignments</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

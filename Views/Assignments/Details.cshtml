@@ -1,0 +1,92 @@
+@model StudyHub.Models.Assignment
+
+@{
+    ViewData["Title"] = "Assignment Details";
+}
+
+<div class="container mt-4">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+
+                        <div>
+
+                            <h2>
+                                @Model.Title
+                            </h2>
+
+                            <span class="badge bg-primary">
+                                @Model.Course?.Title
+                            </span>
+
+                        </div>
+
+                        <div class="text-end">
+
+                            <small class="text-muted">
+                                Due Date
+                            </small>
+
+                            <div class="fw-bold">
+                                @Model.DueDate.ToShortDateString()
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+                    <h5 class="mb-3">
+                        Description
+                    </h5>
+
+                    <p style="white-space: pre-line;">
+
+                        @Model.Description
+
+                    </p>
+
+                    <div class="mt-4">
+
+                        <a class="btn btn-warning"
+                           asp-action="Edit"
+                           asp-route-id="@Model.Id">
+
+                            Edit
+
+                        </a>
+
+                        <a class="btn btn-danger"
+                           asp-action="Delete"
+                           asp-route-id="@Model.Id">
+
+                            Delete
+
+                        </a>
+
+                        <a class="btn btn-secondary"
+                           asp-action="Index">
+
+                            Back
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
